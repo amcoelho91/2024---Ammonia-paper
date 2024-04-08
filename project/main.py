@@ -20,6 +20,7 @@ def main():
     case_nr = 3
     if case_nr == 1:
         h = 24 * 365
+        h = 24 * 1 * 4
     elif case_nr == 2:
         h = 24 * 7 * 4
     else:
@@ -49,8 +50,8 @@ def main():
     show_figure_option = 1
     save_figure_option = 1
     #create_figures(m, h, case_nr, save_figure_option, show_figure_option)
-    create_figures_bar(m, h, case_nr)
-    create_figures_SOC(m, h, resources, case_nr)
+    #create_figures_bar(m, h, case_nr)
+    #create_figures_SOC(m, h, resources, case_nr)
 
     return 0
 

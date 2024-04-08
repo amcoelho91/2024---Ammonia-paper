@@ -8,7 +8,7 @@ INPUT_DIR = Path(__file__).parent.parent / "data_input"
 def get_prices(case_nr: int, h: int) -> dict:
     ''' Get prices data '''
 
-    if case_nr == 1:
+    if case_nr == 0:
         book_networks = INPUT_DIR / "2022 - Prices.xls"
     elif case_nr == 2:
         book_networks = INPUT_DIR / "2022 - Prices_short.xls"

@@ -26,6 +26,7 @@ def create_model(m: ConcreteModel, h: int, number_resources: int, resources: dic
         m = create_storage_electrical_model(m, h, number_resources, resources)
         m = create_market_constraints(m, h, number_resources)
 
+
     return m
 
 
@@ -64,7 +65,7 @@ def create_bidding_model(m: ConcreteModel(), h: int, number_resources: int, case
         m.c1.add(m.P_E[t] == resources_power)
         m.c1.add(m.P_E_pos[t] - m.P_E_neg[t] == m.P_E[t])
         m.c1.add(m.P_E_pos[t] + m.P_E_neg[t] == m.P_E[t])
-        if case != 1:
+        if 1:
             for t in range(0, h):
                 m.c1.add(m.P_H2[t] == sum(m.P_C_H2_market[i, t] + m.P_sto_H2_market[i, t]
                                           for i in range(0, number_resources)))
@@ -101,6 +102,7 @@ def create_storage_electrical_model(m: ConcreteModel(), h: int, number_resources
     P_sto_E_dis_max = resources['electrical_storage']['max_discharging']
     P_sto_E_ch_max = resources['electrical_storage']['max_charging']
     soc_sto_E_init = resources['electrical_storage']['initial_soc']
+
 
     for i in range(0, number_resources):
         m.c1.add(m.soc_sto_E[i, 0] == soc_sto_E_init)
@@ -171,7 +173,7 @@ def create_compressor_hydrogen_model(m: ConcreteModel(), h: int, number_resource
             m.c1.add(m.P_C_H2_E[j, t] == alpha * m.P_C_H2[j, t])
             m.c1.add(m.P_C_H2[j, t] <= maximum_power)
 
-            if case in [2, 3]:
+            if case in [1, 2, 3]:
                 m.c1.add(m.P_C_H2[j, t] == m.P_C_H2_sto_H2[j, t] + m.P_C_H2_AP[j, t] + m.P_C_H2_market[j, t])
             else:
                 m.c1.add(m.P_C_H2[j, t] == m.P_C_H2_sto_H2[j, t] + m.P_C_H2_AP[j, t])
@@ -200,7 +202,7 @@ def create_storage_hydrogen_model(m: ConcreteModel(), h: int, number_resources: 
             m.c1.add(m.P_sto_H2_ch[i, t] <= m.b_sto_H2_ch[i, t] * max_power_ch)
             m.c1.add(m.P_sto_H2_dis[i, t] <= (1 - m.b_sto_H2_ch[i, t]) * max_power_dis)
 
-            if case in [2, 3]:
+            if case in [1, 2, 3]:
                 m.c1.add(m.P_sto_H2_dis[i, t] == m.P_sto_H2_AP[i, t] + m.P_sto_H2_market[i, t])
             else:
                 m.c1.add(m.P_sto_H2_dis[i, t] == m.P_sto_H2_AP[i, t])

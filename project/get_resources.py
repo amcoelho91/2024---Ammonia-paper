@@ -21,8 +21,8 @@ def get_resources(case_nr: int) -> dict:
 
 
 
-    if case_nr in [2, 3]:
-        PV =            {"max_power": 50000 * 2,              # kW
+    if case_nr in [1, 2, 3]:
+        PV =            {"max_power": 50000 * 0.5,              # kW
                          "PV_profile": get_PV_profile(case_nr)}  # profile (%)
     else:
         PV = {"max_power": 50000 * 1,  # kW
